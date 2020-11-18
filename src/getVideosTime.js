@@ -3,7 +3,7 @@ module.exports = async function(page, url) {
     waitUntil: 'networkidle2'
   });
   
-  const [hours, minutes, seconds] = await page.evaluate((body) => {
+  return page.evaluate(() => {
     const videos = document.querySelectorAll('.ytd-playlist-video-list-renderer span.ytd-thumbnail-overlay-time-status-renderer')
     
     let hours = 0, minutes = 0, seconds = 0;
@@ -20,9 +20,9 @@ module.exports = async function(page, url) {
         seconds += Number(fullTime[1])
       }
     })
-    
-    return [hours, minutes, seconds]
-  });
   
-  return [hours, minutes, seconds];
+    const fullTimeInSeconds = (hours * 60 * 60) + (minutes * 60) + seconds;
+
+    return fullTimeInSeconds;
+  });
 }

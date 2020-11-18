@@ -20,22 +20,11 @@ const platform = os.platform();
   const cdDiegao = await getVideosTime(page, 'https://www.youtube.com/playlist?list=PL85ITvJ7FLohhULgUFkYBf2xcXCG6yfVV')
   const cdMaykao = await getVideosTime(page, 'https://www.youtube.com/playlist?list=PL85ITvJ7FLoifcDIBeuuAhh4_799RZaSc')
   
-  // let [hours, minutes, seconds] = await getVideosTime(page, 'https://www.youtube.com/playlist?list=PL85ITvJ7FLoiOC_CjhpYjobA2tnt27TQc')
-  let hours = cdDiegao[0] + cdMaykao[0];
-  let minutes = cdDiegao[1] + cdMaykao[1];
-  let seconds = cdDiegao[2] + cdMaykao[2];
+  const fullTime = cdDiegao + cdMaykao;
 
-  // formatar da maneira correta
-
-  const minutesFromSeconds = Math.floor(seconds / 60);
-  
-  seconds = seconds % 60;
-  minutes += minutesFromSeconds;
-
-  const hoursFromMinutes = Math.floor(minutes / 60);
-
-  minutes = minutes % 60;
-  hours += hoursFromMinutes;
+  const hours = Math.floor(fullTime / 60 / 60);
+  const minutes = Math.floor(fullTime % (60 * 60) / 60);
+  const seconds = fullTime % 60;
 
   console.log(
     `Produzimos ${hours}:${minutes}:${seconds} de conteúdo para o Code/Drops`
