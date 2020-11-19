@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "main": "src/crawler.js",
-  "scripts":{
-    "start":"node src/crawler.js"},
+  "scripts": {
+    "crawler": "node src/crawler.js",
+    "crawlerAll": "node src/crawlerAllPlaylists.js"
+  },
   "license": "MIT",
   "dependencies": {
     "puppeteer-core": "^5.5.0"

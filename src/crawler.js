@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer-core';
 import os from 'os';
 
 import { getVideosTime } from './getVideosTime.js';
+import { getFormattedTime } from './getFormattedTime.js';
 
 const executablePaths = {
   'linux': '/usr/bin/google-chrome',
@@ -23,15 +24,9 @@ const platform = os.platform();
   const cdMaykao = await getVideosTime(page, 'https://www.youtube.com/playlist?list=PL85ITvJ7FLoifcDIBeuuAhh4_799RZaSc');
   // const PodcastUseCase = await getVideosTime(page, 'https://www.youtube.com/playlist?list=PL85ITvJ7FLoiOC_CjhpYjobA2tnt27TQc')
 
-  // formatar tempo da maneira correta
-  const oneHour = 3600;
-  const fullTime = cdDiegao + cdMaykao;
+  const time = cdDiegao + cdMaykao;
 
-  const hours = Math.floor(fullTime / oneHour);
-  const minutes = Math.floor((fullTime % oneHour) / 60);
-  const seconds = fullTime % 60;
-
-  console.log(`Produzimos ${hours}:${minutes < 10 ? ('0' + minutes) : minutes}:${seconds} de conteúdo para o Code/Drops`);
+  console.log(`Produzimos ${getFormattedTime(time)} de conteúdo para o Code/Drops`);
 
   await browser.close();
 })();
