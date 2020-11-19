@@ -1,7 +1,10 @@
 {
   "name": "crawler-codedrop",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "src/crawler.js",
+  "scripts":{
+    "start":"node src/crawler.js"},
   "license": "MIT",
   "dependencies": {
     "puppeteer-core": "^5.5.0"
