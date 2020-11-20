@@ -7,5 +7,7 @@ export function getFormattedTime(fullTimeInSeconds) {
   const minutes = Math.floor((fullTime % oneHour) / 60);
   const seconds = fullTime % 60;
 
-  return `${hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds}`;
+  return `${hours < 10 ? '0' + hours : hours}:${
+    minutes < 10 ? '0' + minutes : minutes
+  }:${seconds < 10 ? '0' + seconds : seconds}`;
 }

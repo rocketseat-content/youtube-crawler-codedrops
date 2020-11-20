@@ -1,14 +1,14 @@
-import puppeteer from "puppeteer-core";
-import os from "os";
+import puppeteer from 'puppeteer-core';
+import os from 'os';
 
-import { getVideosTime } from "./getVideosTime.js";
-import { getAllPlaylists } from "./getAllPlaylists.js";
-import { getFormattedTime } from "./getFormattedTime.js";
+import { getVideosTime } from './getVideosTime.js';
+import { getAllPlaylists } from './getAllPlaylists.js';
+import { getFormattedTime } from './getFormattedTime.js';
 
 const executablePaths = {
-  linux: "/usr/bin/google-chrome",
-  darwin: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  win32: "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+  linux: '/usr/bin/google-chrome',
+  darwin: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  win32: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
 };
 
 const platform = os.platform();
@@ -23,7 +23,7 @@ const platform = os.platform();
 
   const playlists = await getAllPlaylists(
     page,
-    "https://www.youtube.com/c/RocketSeat/playlists"
+    'https://www.youtube.com/c/RocketSeat/playlists'
   );
   const playlistsTimes = [];
 
@@ -36,20 +36,13 @@ const platform = os.platform();
     console.log(`${playlist.title}: ${getFormattedTime(time)}`);
   }
 
-  const times = playlistsTimes.reduce((previousTime, currentTime) => {
-    if (previousTime === undefined) {
-      previousTime = { time: 0 };
+  function sumTimes(previous, current) {
+    if (previous !== undefined) {
+      previous = { time: previous };
+      return previous.time + current.time;
     }
-
-    console.log("previous", previousTime.time);
-    console.log("current", currentTime.time);
-
-    let fullTimeInSeconds = previousTime.time + currentTime.time;
-    // 675.298
-    // console.log(fullTimeInSeconds);
-
-    return fullTimeInSeconds;
-  });
+  }
+  let times = playlistsTimes.reduce(sumTimes, 0);
 
   console.log(`Produzimos ${getFormattedTime(times)} de conteúdo Gratuito`);
 
