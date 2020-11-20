@@ -5,9 +5,9 @@ import { getVideosTime } from './getVideosTime.js';
 import { getFormattedTime } from './getFormattedTime.js';
 
 const executablePaths = {
-  'linux': '/usr/bin/google-chrome',
-  'darwin': '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  'win32': 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'
+  linux: '/usr/bin/google-chrome',
+  darwin: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  win32: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
 };
 
 const platform = os.platform();
@@ -15,7 +15,7 @@ const platform = os.platform();
 (async () => {
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: executablePaths[platform]
+    executablePath: executablePaths[platform],
   });
 
   const page = await browser.newPage();

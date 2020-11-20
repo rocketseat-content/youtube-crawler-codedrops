@@ -7,6 +7,7 @@ export async function getAllPlaylists(page, url) {
   });
 
   return await page.evaluate(() => {
+    // eslint-disable-next-line no-undef
     const elements = document.querySelectorAll('ytd-grid-playlist-renderer');
 
     return [...elements].map((playlistElement) => {

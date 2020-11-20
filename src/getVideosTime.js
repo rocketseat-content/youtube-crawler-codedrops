@@ -3,13 +3,19 @@ export async function getVideosTime(page, url) {
     // linux, darwin
     // waitUntil: 'networkidle2'
     // win32
-    waitUntil: 'networkidle0'
+    waitUntil: 'networkidle0',
   });
 
+  // eslint-disable-next-line no-unused-vars
   return await page.evaluate((body) => {
-    const videos = document.querySelectorAll('.ytd-playlist-video-list-renderer span.ytd-thumbnail-overlay-time-status-renderer');
+    // eslint-disable-next-line no-undef
+    const videos = document.querySelectorAll(
+      '.ytd-playlist-video-list-renderer span.ytd-thumbnail-overlay-time-status-renderer'
+    );
 
-    let hours = 0, minutes = 0, seconds = 0;
+    let hours = 0,
+      minutes = 0,
+      seconds = 0;
 
     videos.forEach((video) => {
       const fullTime = video.innerHTML.split(':');

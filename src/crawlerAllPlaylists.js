@@ -21,10 +21,7 @@ const platform = os.platform();
 
   const page = await browser.newPage();
 
-  const playlists = await getAllPlaylists(
-    page,
-    'https://www.youtube.com/c/RocketSeat/playlists'
-  );
+  const playlists = await getAllPlaylists(page, 'https://www.youtube.com/c/RocketSeat/playlists');
   const playlistsTimes = [];
 
   for (const playlist of playlists) {
